@@ -1,0 +1,199 @@
+.jumbotron {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron h1 {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: 0.25rem;
+}
+
+.cashTxt {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 30px;
+  letter-spacing: -0.2px;
+  word-spacing: -3.4px;
+  color: #ff0000;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: normal;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px #ffa500;
+  text-align: right;
+}
+
+.cards {
+  width: 200px;
+  height: 380px;
+  background-size: cover;
+  background-position-x: center;
+  border-radius: 10%;
+  background-position-x: 60%, center;
+}
+
+.max-w-10 {
+  max-width: 10%;
+}
+
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+.m-t-25 {
+  margin-top: 25px;
+}
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.betTxt {
+  position: absolute;
+  left: 47%;
+}
+
+#helpModal > div {
+  max-width: 50%;
+}
+
+.whoWintxt,
+.whoWintxt2 {
+  color: #00c70c;
+  background-color: #474747;
+  text-shadow: #00c70c 0 0 10px;
+  text-align: center;
+  font-size: 150%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.loseTxt {
+  color: #ff0000;
+  text-shadow: #ff0000 0 0 10px;
+}
+.draw {
+  color: #eeff00;
+  text-shadow: #eeff00 0 0 10px;
+}
+
+.cards_w {
+  width: 32%;
+}
+
+.pc1 {
+  /* background-image: url(../assets/pics/g1.jpg); */
+  background-size: cover;
+  background-position-x: center;
+}
+
+.pc2 {
+  /* background-image: url(../assets/pics/g2.jpg); */
+  background-size: cover;
+  background-position-x: center;
+}
+.dc1 {
+  /* background-image: url(../assets/pics/g3.jpg); */
+  background-size: cover;
+  background-position-x: center;
+}
+
+.dc2 {
+  /* background-image: url(../assets/pics/g4.jpg); */
+  background-size: cover;
+  background-position-x: center;
+}
+
+/* bet buttons */
+
+.betTo {
+  color: white;
+  font-size: larger;
+  position: absolute;
+  top: 26px;
+  left: 63px;
+}
+
+.m-r-m10 {
+  margin-right: -10px;
+}
+
+.m-t-23 {
+  margin-top: 23px;
+  /* margin-left: -80px; */
+}
+
+.splitBtn {
+  background-color: #8061cc;
+  border-color: #282544;
+}
+
+.splitHand {
+  margin-top: 30px;
+  display: none;
+}
+
+.pad-25 {
+  padding: 25px;
+}
+
+body > main > div > div:nth-child(1) {
+  margin-top: 15px;
+}
+.p1txt {
+  margin-right: 25px;
+}
+
+.betpop {
+  position: relative;
+  top: -70px;
+  margin-left: -60px;
+}
+
+.standBtn {
+  min-width: 160px;
+}
+
+.downBtn {
+  min-width: 160px;
+}
+.dealBtn {
+  min-width: 140px;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+
+/* small screen */
+@media only screen and (max-width: 767px) {
+  .ds {
+    margin-top: 20px;
+  }
+}

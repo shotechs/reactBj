@@ -1,0 +1,31 @@
+{
+  "gameBj": [
+    {
+      "id": 1,
+      "userName": "shotechs",
+      "cash": 500,
+      "moneyType": "$",
+      "email": "shotechs@gmail.com",
+      "playerCards": [
+        {
+          "card1": "assets\\cards\\h5.png",
+          "card2": "assets\\cards\\c5.png",
+          "points": 10,
+          "status": "Playing",
+          "split": true,
+          "DD": false,
+          "hit": 0,
+          "bet": 3
+        }
+      ],
+      "dealerCards": [
+        {
+          "card1": "assets\\cards\\h7.png",
+          "card2": "assets\\cards\\h3.png",
+          "points": 10,
+          "status": "Not Playing"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "header/header";
+@import "game/game";
+@import "profile/profile";
+//@import "footer/footer";
+
+.jumbotron {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.mt-8p {
+  margin-top: 8%;
+}
+
+.mb-8p {
+  margin-bottom: 4%;
+}
+
+.dispC {
+  display: contents;
+}
+
+.ml1p {
+  margin-left: 1%;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+.p1p {
+  padding: 1%;
+}
+
+.tc {
+  text-align: center;
+}
+
+.FaQuestionCircle {
+  color: mediumblue;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: -2px;
+  cursor: pointer;
+}
+
+.mb-7 {
+  margin-bottom: 7%;
+}
+
+.mb-12 {
+  margin-top: -12%;
+}
+
+.w90p {
+  width: 90%;
+}
+
+.w95p {
+  width: 95%;
+}
+
+.w100p {
+  width: 100%;
+}
+
+.w50p {
+  width: 50%;
+}
+
+.w10p {
+  width: 10%;
+}

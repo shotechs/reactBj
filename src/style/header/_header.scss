@@ -1,0 +1,12 @@
+.navbar-brand strong {
+  margin-left: 10px;
+}
+
+.bg-dark {
+  background-color: #b82bdb !important;
+}
+
+.navbar.navbar-dark.bg-dark.shadow-sm > div > div {
+  margin-left: auto;
+  margin-right: 2%;
+}
