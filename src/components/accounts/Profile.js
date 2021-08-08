@@ -2,7 +2,7 @@ import React from 'react'
 import { FaUsersCog, FaWallet, FaLock, FaTools } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import User from './User';
+import UserProfile from './UserProfile';
 import Pay from './Pay';
 import Change from './Change';
 import Setting from './Setting';
@@ -11,9 +11,6 @@ import { useHistory } from 'react-router-dom';
 
 
 function Profile({ setUser, loggedInStatus, user, setLoggedInStatus }) {
-
-
-
 
     const history = useHistory();
     const [profilePlace, setProfilePlace] = useState("profile");
@@ -146,11 +143,11 @@ function Profile({ setUser, loggedInStatus, user, setLoggedInStatus }) {
 
 
                             {menuSelect === "profile" ?
-                                <User setLoggedInStatus={setLoggedInStatus}
+                                <UserProfile setLoggedInStatus={setLoggedInStatus}
                                     setUser={setUser}
                                     user={user}
                                     loggedInStatus={loggedInStatus}
-                                ></User> : ""}
+                                ></UserProfile> : ""}
                             {menuSelect === "cash" ? <Pay></Pay> : ""}
                             {menuSelect === "settings" ? <Setting></Setting> : ""}
                             {menuSelect === "change" ? <Change></Change> : ""}

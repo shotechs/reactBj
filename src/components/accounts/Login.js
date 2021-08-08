@@ -1,4 +1,5 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+//import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { FaQuestionCircle } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useState, } from 'react'
@@ -6,7 +7,8 @@ import { ReactComponent as Logo } from '../logo.svg';
 import { useHistory } from 'react-router-dom';
 //import Toasty from '../Toasty';
 
-import { usersReducer } from '../../reducers/userReducer';
+// import { usersReducer } from '../../reducers/userReducer';
+// import { usersReducer } from '../../reducers/userReducer';
 
 export const GameContext = createContext();
 
@@ -14,17 +16,17 @@ export const GameContext = createContext();
 function Login({ setUser, loggedInStatus, user, setLoggedInStatus, token,
     setToken }) {
 
-    const [users, dispatch] = useReducer(usersReducer, [], () => {
-        const localData = localStorage.getItem('username');
-        return localData ? JSON.parse(localData) : [];
-    });
-    useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(user));
-    }, [user]);
+    // const [users, dispatch] = useReducer(usersReducer, [], () => {
+    //     const localData = localStorage.getItem('username');
+    //     return localData ? JSON.parse(localData) : [];
+    // });
+    // useEffect(() => {
+    //     localStorage.setItem('users', JSON.stringify(user));
+    // }, [user]);
 
     const appst = 'assets/icons/appStore.png';
     const playst = 'assets/icons/gPlay.png';
-    const [username1, setusername1] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
     const [errMes, setErrMes] = useState("");
     const history = useHistory();
@@ -48,12 +50,12 @@ function Login({ setUser, loggedInStatus, user, setLoggedInStatus, token,
 
     const SignIn = (event) => {
         getUser()
-        dispatch('ADD_USER')
+        //  dispatch('ADD_USER')
         event.preventDefault();
     }
 
-    const UsernameChange = (event) => {
-        setusername1(event.target.value);
+    const EmailChange = (event) => {
+        setEmail(event.target.value);
     }
 
     const Password = (event) => {
@@ -67,7 +69,7 @@ function Login({ setUser, loggedInStatus, user, setLoggedInStatus, token,
                 const msg1 = response.json().then(msg => {
                     setErrMes(msg.msg)
                 })
-                return response.statusText
+                return msg1
             }
             throw Error(response.statusText);
         }
@@ -78,24 +80,34 @@ function Login({ setUser, loggedInStatus, user, setLoggedInStatus, token,
     const getloginUrl = " http://localhost:5000/api/user/login/";
     const getUser = async () => {
         const data = {
-            username: username1,
+            email: email,
             password: password
         }
+
+
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+
+        headers.append("Access-Control-Allow-Origin", "*");
+        headers.append('Access-Control-Allow-Credentials', 'true');
+        headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        headers.append("Access-Control-Allow-Headers",
+            "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Authorization, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+
+
         const res = await fetch(getloginUrl, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: headers,
             body: JSON.stringify(data),
-        }
-        ).then(handleErrors).then(response => response.json())
+        }).then(handleErrors).then(response => response.json())
             .then(data => {
                 setLoggedInStatus(data.auth)
                 setUser(data.user)
                 localStorage.setItem("token", data.token)
-                localStorage.setItem("user", data.user)
-            },
-            )
+                localStorage.setItem("user", JSON.stringify(data.user))
+            })
             .catch((error) => {
                 console.error('Error:', error);
                 if (typeof error.json === "function") {
@@ -106,11 +118,9 @@ function Login({ setUser, loggedInStatus, user, setLoggedInStatus, token,
                         console.log("Generic error from API");
                         console.log(error.statusText);
                     });
-                } else {
-                    //  console.log("Fetch error");
-                    //  console.log(error);
                 }
             });
+        return res;
     }
     return (
         <>
@@ -125,7 +135,7 @@ function Login({ setUser, loggedInStatus, user, setLoggedInStatus, token,
                             <h1 className="input-group mb-3 justify-content-center">BlackJack XXX</h1>
                             <p className="input-group mb-3 justify-content-center">Login Here</p>
                             <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Username" required minLength="3" maxLength="30" aria-label="User name" aria-describedby="basic-addon1" onChange={UsernameChange} />
+                                <input type="text" className="form-control" placeholder="Email" required minLength="3" maxLength="30" aria-label="User email" aria-describedby="basic-addon1" onChange={EmailChange} />
                             </div>
                             <div className="input-group  mb-3">
                                 <input type="password" className="form-control" placeholder="Password" id="inputPassword" aria-label="Password" aria-describedby="basic-addon1" minLength="6" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8-30 characters" onChange={Password} />

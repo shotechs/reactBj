@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaQuestionCircle } from 'react-icons/fa'
+//import { FaQuestionCircle } from 'react-icons/fa'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { ReactComponent as Logo } from '../logo.svg';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 
 
@@ -12,19 +12,19 @@ import { useHistory } from 'react-router-dom';
 function Reg({ userId, username, email, cash, setCash, setemail, setusername, setuserId, setMoneyType }) {
     const appst = 'assets/icons/appStore.png';
     const playst = 'assets/icons/gPlay.png';
-
-
     const history = useHistory();
+    const [username1, setusername1] = useState("");
+    const [password, setpassword] = useState("");
+    const [repeatPassword, setrepeatPassword] = useState("");
+    const [email1, setemail1] = useState("");
+    const [errMes, setErrMes] = useState("");
 
     const Register = () => {
-        // alert('Error: ' + password + repeatPassword);
-
         if (password === repeatPassword) {
             setErrMes('')
             getUser()
             if (userId !== "") {
                 alert('userId: ' + userId + 'username: ' + username + 'email: ' + email + 'cash: ' + cash);
-
                 history.push('/profile')
             }
         } else {
@@ -49,24 +49,14 @@ function Reg({ userId, username, email, cash, setCash, setemail, setusername, se
         setemail1(event.target.value)
     }
 
-    const [username1, setusername1] = useState("");
-    const [password, setpassword] = useState("");
-    const [repeatPassword, setrepeatPassword] = useState("");
-    const [email1, setemail1] = useState("");
-    const [errMes, setErrMes] = useState("");
-
     function handleErrors(response) {
         if (!response.ok) {
-            // setErrMes(response.text())
             if (response.status === 400) {
-
                 const msg1 = response.json().then(msg => {
-                    // console.log(msg.msg);
                     setErrMes(msg.msg)
                 })
-
-                //  console.log("Fetch error 400 ", msg1);
-                return response.statusText
+                //return response.statusText
+                return msg1
             }
             throw Error(response.statusText);
         }
@@ -113,9 +103,8 @@ function Reg({ userId, username, email, cash, setCash, setemail, setusername, se
                     //  console.log("Fetch error");
                     //  console.log(error);
                 }
-
             });
-
+        return res;
     }
 
 
@@ -190,9 +179,9 @@ function Reg({ userId, username, email, cash, setCash, setemail, setusername, se
                             </Form.Group>
                         </Form>
                         <p>By signing up, you agree to our&nbsp;
-     <Link to={{ pathname: "http://www.sholab.com" }} target="_blank" className="text-black">Terms</Link>
-     ,&nbsp; <Link to={{ pathname: "http://www.sholab.com" }} target="_blank" className="text-black">Data Policy</Link>
-      &nbsp;and&nbsp; <Link to={{ pathname: "http://www.sholab.com" }} target="_blank" className="text-black">Cookies Policy</Link> .</p>
+                            <Link to={{ pathname: "http://www.sholab.com" }} target="_blank" className="text-black">Terms</Link>
+                            ,&nbsp; <Link to={{ pathname: "http://www.sholab.com" }} target="_blank" className="text-black">Data Policy</Link>
+                            &nbsp;and&nbsp; <Link to={{ pathname: "http://www.sholab.com" }} target="_blank" className="text-black">Cookies Policy</Link> .</p>
                     </div>
                 </div>
 

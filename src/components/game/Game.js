@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import Bet from './Bet'
 import BetDownBtn from './BetDownBtn'
 import BetPop from './BetPop'
@@ -14,13 +14,13 @@ import SplitPlane from './SplitPlane'
 import StandBtn from './StandBtn'
 // import PropTypes from 'prop-types'
 import WinPlane from './WinPlane'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, } from 'react'
 //import { gameBj } from "../db2"
 import { useHistory } from 'react-router-dom';
 // import Test from './Test'
+//import HandleErrors from '../helpers/errors'
 
-
-function Game({ loggedInStatus, user, token }) {
+function Game({ loggedInStatus, user, setUser, setLoggedInStatus, token, getUser }) {
 
 
     const history = useHistory();
@@ -36,6 +36,7 @@ function Game({ loggedInStatus, user, token }) {
     const [cash, setCash] = useState(user.cash)
     const [moneyType, setMoneyType] = useState(user.moneyType)
     const [userName, setUserName] = useState(user.username)
+
     const [betAmount, setBetAmount] = useState(1)
     const [showSplit, setShowSplit] = useState(false)
     const [showSplitBtn, setShowSplitBtn] = useState(false)
@@ -63,19 +64,25 @@ function Game({ loggedInStatus, user, token }) {
 
     const [errMes, setErrMes] = useState("");
 
-
-    function BackHome() {
+    const BackHome = () => {
         history.push('/')
     }
+
+
+
+
+
+    //todo take out
+
 
 
     function handleErrors(response) {
         if (!response.ok) {
             // setErrMes(response.text())
             if (response.status === 400) {
-                BackHome()
+
                 const msg1 = response.json().then(msg => {
-                    //     console.log(msg.message);
+                    console.log(msg.message);
                     setErrMes(msg.message)
 
                 })
@@ -89,12 +96,11 @@ function Game({ loggedInStatus, user, token }) {
     }
 
 
+
     // get the game here
     //  const [gameBj, setGameBj] = useState([]);
 
-    useEffect(() => {
-        //  console.log(gameStart);
-    }, [])
+
 
     const getGameUrl = "http://localhost:5000/api/bjGame/deal";
     const getGame = async () => {
@@ -109,9 +115,6 @@ function Game({ loggedInStatus, user, token }) {
         }
         ).then(handleErrors).then(response => response.json())
             .then(data => {
-
-
-                //console.log('Success:', data);
                 setGame_id(data._id)
                 setpStatus(data.playerCards[0].status)
                 setPlayer1Score1(data.playerCards[0].points)
@@ -122,7 +125,7 @@ function Game({ loggedInStatus, user, token }) {
 
                 // setDealerCard1("assets\\cards\\" + data.dealerCards.card[0] + ".png")
                 setDealerCard2("assets\\cards\\" + data.dealerCards.card[1] + ".png")
-                setBetAmount(data.playerCards[0].bet)
+                setBetAmount(data.bet)
                 setDealerScore(data.dealerCards.points)
                 setdStatus(data.dealerCards.status)
                 setShowSplitBtn(data.playerCards[0].split)
@@ -141,8 +144,6 @@ function Game({ loggedInStatus, user, token }) {
     }
 
     const hitGameUrl = "http://localhost:5000/api/bjGame/playerhit";
-
-
     const hitGame = async (game_id, Hand) => {
         const data = { user_id: user._id, _id: game_id, hand: Hand }
         const res = await fetch(hitGameUrl, {
@@ -190,88 +191,8 @@ function Game({ loggedInStatus, user, token }) {
         let row = 1;
         //file name ref
         let getNextCard = getNextCard_txt_p + ".png";
-        // eval("var " + cardName_p + "=  getNextCard;");
-
-        // //if end of grid row
-        // if (
-        //     hit_counter == i &&
-        //     (hit_counter == 3 || hit_counter == 6 || hit_counter == 9)
-        // ) {
-        //     row = 1;
-        //     addcardView1(getNextCard, cardName_p, row, sideView_p, handSide);
-        //     row++;
-        // }
-        // //if on a new row
-        // else if (
-        //     hit_counter == i &&
-        //     (hit_counter == 4 || hit_counter == 7 || hit_counter == 10)
-        // ) {
-        //     addcardView2(getNextCard, cardName_p, row, sideView_p, handSide);
-        // } // middle
-        // else if (playerStandH1 == "cardAdd") {
-        //     addcardView3(getNextCard);
-        // } else {
-        //     addcardView1(getNextCard, cardName_p, row, sideView_p, handSide);
-        // }
-
-        // if (playerStandH1 == "hand1" || playerStandH1 == "") {
-        //     startpoint1++;
-        // } else if (playerStandH1 == "hand2" || playerStandH1 == "cardAdd") {
-        //     startpoint3++;
-        // }
-        // // next point
     }
 
-
-
-    // function addcardView1(getNextCard, cardName, row, side, handSide) {
-    //     //new col
-    //     $("." + handSide + " ." + side + "r" + row).append(
-    //       "<div class='col'><img  src='assets/cards/" +
-    //         getNextCard +
-    //         "' alt='...'  class='cards " +
-    //         cardName +
-    //         "'/></div>"
-    //     );
-    //     $("." + handSide + " ." + cardName).css(
-    //       "background-image",
-    //       "linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, 0.1)),url('./assets/pics/g" +
-    //         getGirlPic() +
-    //         ".jpg')"
-    //     );
-    //   }
-
-    //   function addcardView2(getNextCard, cardName, row, side, handSide) {
-    //     //make new row
-    //     $("." + handSide + " ." + side).append(
-    //       "<div class='row " +
-    //         side +
-    //         "r" +
-    //         row +
-    //         "'><div class='col'><img  src='assets/cards/" +
-    //         getNextCard +
-    //         "' alt='...'  class='cards " +
-    //         cardName +
-    //         "'/></div></div>"
-    //     );
-    //     $("." + handSide + " ." + cardName).css(
-    //       "background-image",
-    //       "linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, 0.1)),url('./assets/pics/g" +
-    //         getGirlPic() +
-    //         ".jpg')"
-    //     );
-    //   }
-
-    //   function addcardView3(getNextCard) {
-    //     //new col
-    //     $(".splitHand .card2 .pc2").attr("src", "assets/cards/" + getNextCard);
-    //     $(".splitHand .card2 .pc2").css(
-    //       "background-image",
-    //       "linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, 0.1)),url('./assets/pics/g" +
-    //         getGirlPic() +
-    //         ".jpg')"
-    //     );
-    //   }
 
 
 
@@ -313,6 +234,8 @@ function Game({ loggedInStatus, user, token }) {
 
     const Deal = () => {
         // restart
+
+        // getUser()
         Restart1()
         setGameStart(true)
         getGame()
@@ -345,6 +268,60 @@ function Game({ loggedInStatus, user, token }) {
     }
 
 
+    //stand start
+    const Stand = () => {
+        if (gameStart === true) {
+            // player set to off
+            setpStatus(false)
+            // dealer set to on
+            setdStatus(true)
+            standGame(game_id)
+
+            for (let x of dealercardsA) { setdpicA1([...dpicA1, getBGPic()]) }
+
+        }
+    }
+
+
+    const standGameUrl = "http://localhost:5000/api/bjGame/dealerplay";
+    const standGame = async (game_id) => {
+        const data = { user_id: user._id, _id: game_id }
+        const res = await fetch(standGameUrl, {
+            method: 'PATCH',
+            headers: {
+                "auth-token": localStorage.getItem("token"),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        }
+        )
+            //.then(handleErrors)
+            .then(response => response.json())
+            .then(data => {
+                //  console.log('Success:', data);
+                setpStatus(data.playerCards[0].status)
+                setPlayer1Score1(data.playerCards[0].points)
+                setDealercardsA(data.dealerCards.card)
+                setDealerScore(data.dealerCards.points)
+                setdStatus(data.dealerCards.status)
+                setGame_status(data.game_status)
+                //update view
+                // flip cards
+                // show score
+                // highlights off
+                // game off
+            },
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
+
+    //stand end
+
+
+
 
 
     const GameOver = () => {
@@ -360,8 +337,8 @@ function Game({ loggedInStatus, user, token }) {
         }
 
         //update cash
-
-
+        getUser()
+        console.log("GameOver");
     }
 
 
@@ -447,7 +424,7 @@ function Game({ loggedInStatus, user, token }) {
                         {/* //  btn4-6 */}
                         <div className="row">
 
-                            {gameStart ? <StandBtn /> : ''}
+                            {gameStart ? <StandBtn onClick={Stand} disabledBtn={pStatus ? true : false} /> : ''}
                             {gameStart && (player1DD) ? <DDBtn /> : ''}
                             <DealBtn
                                 color={(gameStart === true) && (game_status !== "Game Over") ? 'red' : 'green'}
@@ -462,14 +439,14 @@ function Game({ loggedInStatus, user, token }) {
                     <div className="col ">
                         <BetUpBtn
                             onClick={BetUp}
-                            disabledBtn={gameStart && (game_status !== "Game Over")}
+                            disabledBtn={gameStart}
                         />
                     </div>
 
                     <div className="col ">
                         <BetDownBtn
                             onClick={BetDown}
-                            disabledBtn={gameStart && (game_status !== "Game Over")}
+                            disabledBtn={gameStart}
                         />
                     </div>
                 </div>

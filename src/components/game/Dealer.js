@@ -17,7 +17,7 @@ function Dealer({ gameStart, status, dealerCard1,
           return (
             <div className="col cards_w" key={i}>
               <img
-                src={((gameStart) && (i === 1)) ? "assets\\cards\\" + card + ".png" : defaultCard}
+                src={((gameStart) && (i !== 0)) ? "assets\\cards\\" + card + ".png" : defaultCard}
                 alt={"Dealer card " + (i + 1)}
                 className="cards dc1"
                 style={gameStart ? imgStyle[i] : defaultStyle}

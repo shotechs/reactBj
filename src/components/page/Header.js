@@ -14,6 +14,8 @@ const Header = ({ setUser, loggedInStatus, user, setLoggedInStatus, title }) => 
   const LogOut = () => {
     //console.log("LogOut");
     setUser("")
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
     history.push('/')
   }
 
@@ -25,7 +27,6 @@ const Header = ({ setUser, loggedInStatus, user, setLoggedInStatus, title }) => 
 
 
   useEffect(() => {
-    // alert(user);
     if (user.user_image !== "") {
       //console.log("user_image: ", user.user_image);
       setUserImage(user.user_image)

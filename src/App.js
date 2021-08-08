@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+// import { useState } from 'react'
+import { useState, useEffect, } from 'react'
 import {
   BrowserRouter as Router, Switch,
   Route
@@ -15,36 +16,65 @@ import Reg from './components/accounts/Reg'
 import Forgot from './components/accounts/Forgot'
 import Profile from './components/accounts/Profile'
 import Error from './components/page/Error'
+import HandleErrors from './components/helpers/errors'
 
 const App = () => {
 
-  const [title, setTitle] = useState("BlackJack Game");
-  // const [userId, setUserId] = useState("");
-  // const [username, setUsername] = useState("");
-  // const [cash, setCash] = useState("");
-  // const [moneyType, setMoneyType] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [address_line_1, setAddress_line_1] = useState("");
-  // const [address_line_2, setAddress_line_2] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-  // const [zip_code, setZip_code] = useState("");
-  // const [bio, setBio] = useState("");
-  // const [user_image, setUser_image] = useState("");
-
-
+  const title = "BlackJack Game";
   const [user, setUser] = useState("");
   const [loggedInStatus, setLoggedInStatus] = useState("");
   const [token, setToken] = useState("");
 
 
 
-  // useEffect(() => {
+  const getUpdateUserUrl = "http://localhost:5000/api/user/userUpdate/";
 
-  //   })
-  // }, [])
+
+
+  const getUser = () => {
+    fetch(getUpdateUserUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).then(HandleErrors).then(response => response.json())
+      .then(data => {
+        setLoggedInStatus(data.auth)
+        setUser(data.user)
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("user", JSON.stringify(data.user))
+        console.log("getUser");
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        if (typeof error.json === "function") {
+          error.json().then(jsonError => {
+            console.log("Json error from API");
+            console.log(jsonError);
+          }).catch(genericError => {
+            console.log("Generic error from API");
+            console.log(error.statusText);
+          });
+        }
+      });
+  }
+
+  const getUser1 = JSON.parse(localStorage.getItem("user"))
+  const email = getUser1.email
+  const data = {
+    email: email
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      setUser(JSON.parse(localStorage.getItem('user')))
+
+    }
+    console.log("u1");
+
+
+
+  }, [])
+
 
 
   // ---------------------------
@@ -176,6 +206,7 @@ const App = () => {
             setUser={setUser}
             user={user}
             token={token}
+            getUser={getUser}
             loggedInStatus={loggedInStatus} />
         </Route>
         <Route path="/login">

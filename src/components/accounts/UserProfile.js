@@ -1,5 +1,4 @@
 import React from 'react'
-import Container from "react-bootstrap/Container";
 import { useState, useEffect } from 'react'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -37,7 +36,9 @@ function User({ setUser, loggedInStatus, user, setLoggedInStatus }) {
 
 
     const UsernameChange = (event) => {
-        user.username = user.username + event.target.value
+
+        //setUser(user.username + event.target.value)
+        setUser(event.target.value)
         console.log(user.username)
     }
 
@@ -161,22 +162,6 @@ function User({ setUser, loggedInStatus, user, setLoggedInStatus }) {
             .then(data => {
                 console.log('Success:', data);
                 user = data
-                //  setUserId(data._id)
-                // setUsername(data.username)
-                // //setCash(data.cash)
-                // setMoneyType(data.moneyType)
-                // setEmail(data.email)
-                // setFirstName(data.firstName)
-                // setLastName(data.lastName)
-                // setAddress_line_1(data.address_line_1)
-                // setAddress_line_2(data.address_line_2)
-                // setCity(data.city)
-                // setState(data.state)
-                // setZip_code(data.zip_code)
-                // setBio(data.bio)
-                // setUser_image(data.user_image)
-
-
 
             },
             )
@@ -391,7 +376,7 @@ function User({ setUser, loggedInStatus, user, setLoggedInStatus }) {
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         Please provide a valid zip.
-          </Form.Control.Feedback>
+                                    </Form.Control.Feedback>
 
                                 </Form.Group>
                             </Form.Row>
