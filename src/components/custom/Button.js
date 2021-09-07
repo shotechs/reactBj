@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-
 const Button = ({ text, onClick, css, modal, target, disabledBtn }) => {
 
   //const [modalset, setmodalset] = useState("")

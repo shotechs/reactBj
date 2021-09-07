@@ -45,7 +45,16 @@
   padding: 6px 0px 0px 15px;
 }
 
-a .icon {
+
+//*[@id="main"]/div/div/div[1]/div/button
+.list-group button{
+  
+  text-align: left;
+  padding: 1rem;
+
+}
+
+button .icon {
   width: 15%;
   height: 5%;
 }
