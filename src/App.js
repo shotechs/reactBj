@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/page/Header";
 import Footer from "./components/page/Footer";
-//import Tasks from './components/Tasks'
-//import AddTask from './components/AddTask'
 import About from "./components/page/About";
 import Game from "./components/game/Game";
 import Home from "./components/page/Home";
@@ -20,8 +18,9 @@ const App = () => {
   const [loggedInStatus, setLoggedInStatus] = useState("");
   const [token, setToken] = useState("");
   const [errMes, setErrMes] = useState("");
+  // todo change link
   const [userImage, setUserImage] = useState("https://github.com/mdo.png");
-  //const getUserImage = localStorage.getItem("userImage");
+
   useEffect(() => {
     if (localStorage.getItem("user")) {
       GetUser(setLoggedInStatus, setUser, setErrMes);
@@ -30,18 +29,9 @@ const App = () => {
       console.log("no user found", errMes);
     }
 
-    // if (getUserImage) {
-    //   //console.log("user_image: ", user.user_image);
-    //   setUserImage(
-    //     localStorage.getItem("userImage") + "#" + new Date().getTime()
-    //   );
-    // }
-
+    // get user image if we got
     if (localStorage.getItem("userImage")) {
-      setUserImage(
-        localStorage.getItem("userImage") + "#" + new Date().getTime()
-      );
-      // setuserImage(userImage + "?" + new Date().getTime());
+      setUserImage(localStorage.getItem("userImage"));
     }
   }, [errMes]);
 
@@ -129,8 +119,6 @@ const App = () => {
   return (
     <Router>
       <Header
-        // onAdd={() => setShowAddTask(!showAddTask)}
-        // showAdd={showAddTask}
         userImage={userImage}
         setLoggedInStatus={setLoggedInStatus}
         setUser={setUser}
@@ -210,9 +198,6 @@ const App = () => {
         <Route path="*">
           <Error />
         </Route>
-        {/* <Route path="/dashboard">
-            <Dashboard />
-          </Route> */}
       </Switch>
       <Footer title={title} />
     </Router>

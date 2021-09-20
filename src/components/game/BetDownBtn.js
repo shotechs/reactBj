@@ -1,5 +1,5 @@
-import React from 'react'
-import Button from '../custom/Button'
+import React from "react";
+import Button from "../custom/Button";
 function BetDownBtn({ onClick, disabledBtn }) {
   return (
     <div className="betDownBtn">
@@ -10,7 +10,14 @@ function BetDownBtn({ onClick, disabledBtn }) {
         disabledBtn={disabledBtn}
       />
     </div>
-  )
+  );
 }
 
-export default BetDownBtn
+export function BetDown(setBetAmount, betAmount) {
+  if (betAmount !== 0) {
+    setBetAmount(betAmount - 1);
+  }
+  return betAmount;
+}
+
+export default BetDownBtn;

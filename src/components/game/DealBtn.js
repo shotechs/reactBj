@@ -1,6 +1,5 @@
-import React from 'react'
-import Button from '../custom/Button'
-
+import React from "react";
+import Button from "../custom/Button";
 
 function DealBtn({ text, onClick }) {
   return (
@@ -11,7 +10,18 @@ function DealBtn({ text, onClick }) {
         onClick={onClick}
       />
     </div>
-  )
+  );
 }
 
-export default DealBtn
+export function DealTxtBtn(gameStart, game_status) {
+  if (gameStart === true && game_status !== "Game Over") {
+    return "Hit";
+  } else if (gameStart === true && game_status === "Game Over") {
+    return "Play Again";
+  } else if (gameStart === false) {
+    return "Deal";
+  }
+  return "Deal";
+}
+
+export default DealBtn;
