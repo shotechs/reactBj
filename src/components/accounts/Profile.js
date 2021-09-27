@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaUsersCog, FaWallet, FaLock, FaTools } from "react-icons/fa";
 import { useState } from "react";
 import UserProfile from "./UserProfile";
 import Pay from "./Pay";
 import Change from "./Change";
 import Setting from "./Setting";
-//import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function Profile({
   setUserImage,
@@ -36,6 +36,22 @@ function Profile({
       setMenuSelect("cash");
     }
   };
+
+  const history = useHistory();
+//if no user in LC
+useEffect(() => {
+  if (!user) {
+    //console.log("no user #44")
+    history.push("/");
+  }
+
+  if (user.cash <= 0) {
+    setMenuSelect("cash");
+  }
+
+});
+
+
 
   return (
     <>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ReactComponent as Logo } from "../logo.svg";
 import { useHistory } from "react-router-dom";
+import { HandleErrors } from "../helpers/errors";
 //import Toasty from '../Toasty';
 
 // import { usersReducer } from '../../reducers/userReducer';
@@ -63,18 +64,6 @@ function Login({
     setpassword(event.target.value);
   };
 
-  function handleErrors(response) {
-    if (!response.ok) {
-      if (response.status === 400) {
-        const msg1 = response.json().then((msg) => {
-          setErrMes(msg.msg);
-        });
-        return msg1;
-      }
-      throw Error(response.statusText);
-    }
-    return response;
-  }
 
   const getloginUrl = " http://localhost:5000/api/user/login/";
   const getUser = async () => {
@@ -101,7 +90,7 @@ function Login({
       headers: headers,
       body: JSON.stringify(data),
     })
-      .then(handleErrors)
+    .then(HandleErrors)
       .then((response) => response.json())
       .then((data) => {
         setLoggedInStatus(data.auth);
@@ -111,6 +100,7 @@ function Login({
       })
       .catch((error) => {
         console.error("Error:", error);
+        setErrMes(error.toString());
         if (typeof error.json === "function") {
           error
             .json()
