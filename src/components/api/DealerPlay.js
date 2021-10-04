@@ -1,11 +1,12 @@
 import { HandleErrors } from "../helpers/errors";
-export async function StandGame(
+async function StandGame(
   game_id,
   setpStatus,
   setPlayer1Score1,
   setDealerScore,
   setGame_status,
   setDealercardsA,
+  setdStatus,
   user
 ) {
   const standGameUrl = "http://localhost:5000/api/bjGame/dealerplay";
@@ -27,13 +28,11 @@ export async function StandGame(
     .then(HandleErrors)
     .then((response) => response.json())
     .then((data) => {
-      //  console.log('Success:', data);
-      //setpStatus(data.playerCards[0].status)
-      setpStatus("");
+      setpStatus(data.playerCards[0].status);
       setPlayer1Score1(data.playerCards[0].points);
       setDealercardsA(data.dealerCards.card);
       setDealerScore(data.dealerCards.points);
-      //setdStatus(data.dealerCards.status)
+      setdStatus(data.dealerCards.status);
       setGame_status(data.game_status);
       //update view
       // flip cards
@@ -47,6 +46,7 @@ export async function StandGame(
   return res;
 }
 //stand end
+
 //stand start
 export function Stand(
   gameStart,
@@ -76,12 +76,12 @@ export function Stand(
       setDealerScore,
       setGame_status,
       setDealercardsA,
+      setdStatus,
       user
     );
 
-    // set the pic for dealer
-    for (let x of dealercardsA) {
-      console.log(x);
+    dealercardsA.forEach(myFunction);
+    function myFunction() {
       setdpicA1([...dpicA1, getBGPic()]);
     }
   }

@@ -9,18 +9,17 @@ import GameBoard from "./GameBoard";
 import Help from "./Help";
 import MoreGames from "./MoreGames";
 import SplitBtn from "./SplitBtn";
-// import SplitPlane from "./SplitPlane";
+import SplitPlane from "./SplitPlane";
 import StandBtn from "./StandBtn";
 import WinPlane from "./WinPlane";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Deal } from "../api/Deal";
-
-import Stand from "./Stand";
 import { getBGPic } from "../custom/GetPic";
 import { DealTxtBtn } from "./DealBtn";
-
 import { hitCard } from "../api/PlayerHit";
+import { Stand } from "../api/DealerPlay";
+import { DD } from "../api/DD";
 
 function Game({ user, setLoggedInStatus, setUser }) {
   const history = useHistory();
@@ -103,11 +102,7 @@ function Game({ user, setLoggedInStatus, setUser }) {
                 <Help />
               </div>
               <div className="col">
-                <MoreGames
-                //   color={showAdd ? 'red' : 'green'}
-                //   text={showAdd ? 'Close' : 'Add'}
-                //   onClick={onAdd}
-                />
+                <MoreGames />
               </div>
               <div className="col-6 pad-10">
                 {gameStart && showSplit ? <SplitBtn /> : ""}
@@ -119,7 +114,7 @@ function Game({ user, setLoggedInStatus, setUser }) {
           </div>
           <div className="col-5 m-t-23">
             <div className="row">
-              {gameStart ? (
+              {gameStart && game_status !== "Game Over" ? (
                 <StandBtn
                   onClick={() =>
                     Stand(
@@ -129,7 +124,13 @@ function Game({ user, setLoggedInStatus, setUser }) {
                       dealercardsA,
                       setdpicA1,
                       dpicA1,
-                      getBGPic
+                      getBGPic,
+                      game_id,
+                      setPlayer1Score1,
+                      setDealerScore,
+                      setGame_status,
+                      setDealercardsA,
+                      user
                     )
                   }
                   disabledBtn={pStatus ? true : false}
@@ -137,7 +138,7 @@ function Game({ user, setLoggedInStatus, setUser }) {
               ) : (
                 ""
               )}
-              {gameStart && player1DD ? <DDBtn /> : ""}
+
               <DealBtn
                 color={
                   gameStart === true && game_status !== "Game Over"
@@ -200,6 +201,61 @@ function Game({ user, setLoggedInStatus, setUser }) {
                         )
                 }
               />
+
+              {player1DD ? (
+                <DDBtn
+                  onClick={() =>
+                    DD(
+                      setGameStart,
+                      setErrMes,
+                      errMes,
+                      user,
+                      setPlayer1Score1,
+                      game_status,
+                      setLoggedInStatus,
+                      setUser,
+                      setpStatus,
+                      setPlayer1hit,
+                      setdStatus,
+                      setPlayer1cardsA,
+                      setGame_status,
+                      setDealercardsA,
+                      game_id,
+                      Hand,
+                      setPlayer1DD,
+                      setBetAmount
+                    )
+                  }
+                />
+              ) : (
+                ""
+              )}
+              {showSplitBtn ? (
+                <SplitBtn
+                  onClick={SplitPlane(
+                    setGameStart,
+                    setErrMes,
+                    errMes,
+                    user,
+                    setPlayer1Score1,
+                    game_status,
+                    setLoggedInStatus,
+                    setUser,
+                    setpStatus,
+                    setPlayer1hit,
+                    setdStatus,
+                    setPlayer1cardsA,
+                    setGame_status,
+                    setDealercardsA,
+                    game_id,
+                    Hand,
+                    setHand,
+                    setBetAmount
+                  )}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

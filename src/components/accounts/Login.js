@@ -64,7 +64,6 @@ function Login({
     setpassword(event.target.value);
   };
 
-
   const getloginUrl = " http://localhost:5000/api/user/login/";
   const getUser = async () => {
     const data = {
@@ -90,7 +89,7 @@ function Login({
       headers: headers,
       body: JSON.stringify(data),
     })
-    .then(HandleErrors)
+      .then(HandleErrors)
       .then((response) => response.json())
       .then((data) => {
         setLoggedInStatus(data.auth);
@@ -127,7 +126,7 @@ function Login({
             <div className="alert-danger">{errMes}</div>
             <form onSubmit={SignIn}>
               <h1 className="input-group mb-3 justify-content-center">
-                BlackJack XXX
+                BlackJack
               </h1>
               <p className="input-group mb-3 justify-content-center">
                 Login Here

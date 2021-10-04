@@ -62,7 +62,7 @@ export async function GetDeal(
     .then(HandleErrors)
     .then((response) => response.json())
     .then((data) => {
-      // console.log("data", data);
+      console.log("data", data);
       if (data !== undefined) {
         setGame_id(data._id);
         setpStatus(data.playerCards[0].status);
